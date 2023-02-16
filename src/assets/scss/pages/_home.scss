@@ -1,0 +1,41 @@
+.home {
+  .site-layout-background {
+    background: #fff;
+    margin: 0;
+    min-height: calc(100vh - 134px);
+  }
+
+  .btn-delete {
+    color: red;
+  }
+
+  .btn-edit {
+    color: blue;
+  }
+
+  .btn-view {
+    color: rgb(46, 245, 99);
+  }
+
+  &-main {
+    flex-direction: row;
+  }
+
+  &-content {
+    min-height: 689px;
+    padding: 16px 16px 0 16px;
+
+    .site-layout-background {
+      padding: 24px;
+    }
+  }
+
+  .menu-site-bar {
+    height: 100%;
+    border-right: 0;
+  }
+
+  .ant-layout-footer {
+    text-align: center;
+  }
+}

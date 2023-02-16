@@ -1,0 +1,43 @@
+.add-product {
+  .img-file {
+    padding: 0 8px 0 0;
+  }
+
+  .ant-input-number-input {
+    height: auto;
+  }
+
+}
+
+.title-add {
+  font-size: 26px;
+  text-align: center;
+  background-image: linear-gradient(90deg, #fdbb2d, #22c1c3);
+  background-clip: text;
+  color: transparent;
+}
+
+.ant-btn.ant-btn-primary {
+  background-color: #12ee54;
+  border: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.ant-form.ant-form-horizontal {
+  border: 2px solid #29e1e4;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(90deg, #22c1c3, #fdbb2d);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 2px 2px rgb(238, 231, 231);
+  width: 600px;
+  margin: 0 auto;
+}
+
+.img-add {
+  width: 50px;
+  height: 30px;
+}

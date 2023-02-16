@@ -1,0 +1,51 @@
+.ant-layout-sider.ant-layout-sider-dark.site-layout-background {
+  flex: 0 0 200px;
+  max-width: 200px;
+  min-width: 200px;
+  width: 200px;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+}
+
+.ant-menu-item.ant-menu-item-only-child:first-child {
+  padding: 0 !important;
+}
+
+span[aria-label="bar-chart"] {
+  color: #ffff33;
+}
+
+span[aria-label="align-left"] {
+  color: #33ff33;
+}
+
+span[aria-label="plus-square"] {
+  color: #0df0f0;
+}
+
+span[aria-label="user"] {
+  color: #960aee;
+}
+
+span[aria-label="login"] {
+  color: red;
+}
+
+.ant-menu-item.ant-menu-item-only-child {
+  img {
+    width: 200px;
+    height: 52px;
+    object-fit: contain;
+  }
+}
+
+.ant-menu-title-content {
+  a {
+    background-image: linear-gradient(90deg, #22c1c3, #fdbb2d);
+    background-clip: text;
+    color: transparent;
+  }
+
+}

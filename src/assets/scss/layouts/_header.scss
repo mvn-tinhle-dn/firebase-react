@@ -1,0 +1,35 @@
+.header {
+  .logo {
+    object-fit: contain;
+  }
+
+  .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #001529;
+  }
+
+  .ant-menu-dark .ant-menu-item-selected>span>a {
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .header-actions {
+    float: right;
+    display: flex;
+  }
+
+  .ant-row-rtl .logo {
+    float: right;
+    margin: 16px 0 16px 24px;
+  }
+}
+
+.ant-layout-header.header {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.ant-layout-header {
+  height: 52px;
+}

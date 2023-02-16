@@ -1,0 +1,40 @@
+.product-list {
+  .img-product {
+    width: 69px;
+    height: 69px;
+    object-fit: cover;
+  }
+
+  .input-search {
+    float: right;
+    margin-bottom: 24px;
+    width: 36%;
+  }
+  .ant-table-cell:last-child {
+    text-align: right;
+  }
+  .anticon svg {
+    font-size: 16px;
+  }
+}
+
+.ant-space.ant-space-horizontal.ant-space-align-center {
+  float: right;
+}
+
+.ant-input-group-addon {
+  display: none;
+}
+
+.ant-form-item-control-input {
+  width: 289px;
+
+}
+
+.flex .ant-form-item-control-input {
+  width: 100%;
+}
+
+button[type=submit] {
+  right: 0;
+}

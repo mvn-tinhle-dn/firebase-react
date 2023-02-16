@@ -1,0 +1,15 @@
+.ant-layout.home-content {
+  margin: 52px 0 0 200px;
+}
+
+.title-page {
+  background-image: linear-gradient(90deg, #22c1c3, #fdbb2d);
+  background-clip: text;
+  color: transparent;
+  font-size: 26px;
+  border-bottom: 1px solid #29e1e4;
+  border-bottom: 2px solid #29e1e4;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(90deg, #22c1c3, #fdbb2d);
+  margin-bottom: 36px;
+}

@@ -1,0 +1,17 @@
+.account {
+  .img-avatar {
+    border-radius: 50%;
+    width: 200px;
+  }
+
+  .account-info {
+    margin-left: 68px;
+
+    h1 {
+      background-image: linear-gradient(90deg, #fdbb2d, #22c1c3);
+      background-clip: text;
+      color: transparent;
+      font-size: 36px;
+    }
+  }
+}

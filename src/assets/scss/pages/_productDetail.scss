@@ -1,0 +1,39 @@
+.product-detail {
+  .img-detail {
+    width: 369px;
+    height: 369px;
+    object-fit: cover;
+  }
+
+  .label-detail {
+    display: inline-block;
+    margin-right: 16px;
+    font-size: 16px;
+    color: #ccc;
+  }
+
+  .des-detail {
+    .label-detail {
+      display: block;
+    }
+  }
+
+  .info-detail {
+    margin-left: 36px;
+    display: inline-block;
+
+    &-item {
+      margin: 12px 0;
+    }
+  }
+
+  .item-name {
+    font-size: 26px;
+  }
+
+  .item-price {
+    color: rgb(20, 53, 195);
+    font-size: 22px;
+  }
+
+}
