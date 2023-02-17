@@ -1,10 +1,14 @@
 import { Button, Form, Input, InputNumber, Select, Upload } from "antd";
 import { useEffect, useState } from "react";
-import openNotificationWithIcon from "../../animations";
 import { getAllTypes } from "../../../services/product.services";
 import { UploadOutlined } from "@ant-design/icons";
 
-export default function FormProd({ onFinish, currItem, nameForm }) {
+export default function FormProd({
+  onFinish,
+  currItem,
+  nameForm,
+  setFileUpload,
+}) {
   const [form] = Form.useForm();
 
   /* eslint-disable no-template-curly-in-string */
@@ -25,12 +29,32 @@ export default function FormProd({ onFinish, currItem, nameForm }) {
       span: 8,
     },
   };
-  const [url, setUrl] = useState(currItem ? currItem.url : "");
   const [arrType, setArrType] = useState([]);
+  const [fileList, setFileList] = useState([]);
 
-  useEffect(() => {
-    getArrType();
-  }, []);
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
+  };
+
+  const onchange = (info) => {
+    const nextState = {};
+    switch (info.file.status) {
+      case "uploading":
+        nextState.fileList = [info.file];
+        break;
+      case "done":
+        nextState.file = info.file;
+        nextState.fileList = [info.file];
+        break;
+      default:
+        nextState.file = null;
+        nextState.fileList = [];
+    }
+    setFileList(nextState.fileList);
+    setFileUpload(nextState.file);
+  };
 
   const getArrType = async () => {
     try {
@@ -39,36 +63,20 @@ export default function FormProd({ onFinish, currItem, nameForm }) {
     } catch (error) {}
   };
 
-  //get image
-  const onChange = (e) => {
-    let file = e.file;
-    console.log(e);
-    if (file.size < 1048480) {
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (e) => {
-        setUrl(e.target.result);
-      };
-    } else {
-      openNotificationWithIcon("warning", "Please choose image size < 1MB");
-    }
-  };
+  useEffect(() => {
+    getArrType();
+  }, []);
 
   useEffect(() => {
     form.setFieldsValue(currItem);
   }, [form, currItem]);
-
-  const beforeUpload = (file) => {
-    if (file.size > 1048480) return null;
-    return false;
-  };
 
   return (
     <Form
       form={form}
       {...layout}
       name="nest-messages"
-      onFinish={(value) => onFinish(value, url)}
+      onFinish={onFinish}
       validateMessages={validateMessages}
       initialValues={currItem}
     >
@@ -140,13 +148,13 @@ export default function FormProd({ onFinish, currItem, nameForm }) {
       <Form.Item name={["des"]} label="Descriptions">
         <Input.TextArea />
       </Form.Item>
-      <Form.Item label="Upload" valuePropName="fileList">
+      <Form.Item label="Upload" name="url">
         <Upload
-          beforeUpload={beforeUpload}
           listType="picture"
           maxCount={1}
-          onChange={onChange}
-          fileList={[url]}
+          onChange={onchange}
+          fileList={fileList}
+          customRequest={dummyRequest}
         >
           <Button icon={<UploadOutlined />}>Upload</Button>
         </Upload>

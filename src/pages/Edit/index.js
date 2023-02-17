@@ -1,14 +1,17 @@
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
 import openNotificationWithIcon from "../../components/animations";
 import FormProd from "../../components/modules/FromProd/index";
+import { metadata, stg } from "../../firebase/firebase-config";
 import { getProduct, updateProduct } from "../../services/product.services";
 
 export default function EditProduct() {
   const { id } = useParams();
-  let navigate = useNavigate();
   const [product, setProduct] = useState();
-  const arrEdit = product;
+  const [fileUpload, setFileUpload] = useState(null);
+  const stgRef = ref(stg, `images/${fileUpload?.name}`);
 
   useEffect(() => {
     const getProductDetail = async () => {
@@ -22,23 +25,20 @@ export default function EditProduct() {
     id && getProductDetail();
   }, [id]);
 
-  async function onFinish(values, url) {
-    if (values.name === "" || values.price === "" || values.num === null) {
-      openNotificationWithIcon("warning", " Miss Prams");
-    } else {
-      arrEdit.name = values.name;
-      arrEdit.type = values.type;
-      arrEdit.price = values.price;
-      arrEdit.num = values.num;
-      arrEdit.des = values.des;
-      url === "" ? (arrEdit.url = product.url) : (arrEdit.url = url);
-      try {
-        await updateProduct(id, arrEdit);
-        openNotificationWithIcon("success", "Update Product");
-      } catch (error) {
-        openNotificationWithIcon("warning", error.message);
-      }
-      navigate("/products");
+  async function onFinish(values) {
+    try {
+      fileUpload
+        ? await uploadBytes(stgRef, fileUpload.originFileObj, metadata).then(
+            (snapshot) => {
+              getDownloadURL(snapshot.ref).then(async (downURL) => {
+                await updateProduct(id, { ...values, url: downURL });
+              });
+            }
+          )
+        : await updateProduct(id, { ...values, url: product.url });
+      openNotificationWithIcon("success", "Update Product");
+    } catch (error) {
+      openNotificationWithIcon("warning", error.message);
     }
   }
 
@@ -50,6 +50,7 @@ export default function EditProduct() {
         currItem={product}
         required={false}
         nameForm="Edit Product"
+        setFileUpload={setFileUpload}
       />
     </div>
   );
